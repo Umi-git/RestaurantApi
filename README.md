@@ -1,1 +1,2 @@
 # RestaurantApi
+Ready to bring your ASP.NET skills out of the classroom and onto the table? In this solo project you’ll cook up a tasty Restaurant Menu & Order Management System. Guests can browse a menu, place sample orders, and view summaries of what’s cooking, all via Minimal API endpoints with Entity Framework Core and a clean Scalar UI for testing. Along the way you’ll explore data modeling, migrations, seeding, and robust validation, giving you a rock-solid foundation for real-world web services.
