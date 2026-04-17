@@ -12,6 +12,14 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
+// Seed database
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<RestaurantDbContext>();
+    db.Database.EnsureCreated();
+    DatabaseSeeder.Seed(db);
+}
+
 // Middleware
 if (app.Environment.IsDevelopment())
 {
