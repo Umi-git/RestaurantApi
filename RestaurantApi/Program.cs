@@ -10,7 +10,21 @@ builder.Services.AddDbContext<RestaurantDbContext>(options =>
 
 builder.Services.AddOpenApi();
 
+builder.Services.AddScoped<IValidator<CreateMenuItemDto>, CreateMenuItemValidator>();
+
 var app = builder.Build();
+
+// Seed database
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<RestaurantDbContext>();
+    db.Database.EnsureCreated();
+    DatabaseSeeder.Seed(db);
+}
+
+// Route groups
+var menu = app.MapGroup("/menu").WithTags("Menu");
+menu.MapMenuEndpoints();
 
 // Middleware
 if (app.Environment.IsDevelopment())
