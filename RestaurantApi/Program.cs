@@ -10,6 +10,8 @@ builder.Services.AddDbContext<RestaurantDbContext>(options =>
 
 builder.Services.AddOpenApi();
 
+builder.Services.AddScoped<IValidator<CreateMenuItemDto>, CreateMenuItemValidator>();
+
 var app = builder.Build();
 
 // Seed database
@@ -28,5 +30,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Route groups
+var menu = app.MapGroup("/menu").WithTags("Menu");
+menu.MapMenuEndpoints();
 
 app.Run();
