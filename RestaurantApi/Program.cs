@@ -11,6 +11,7 @@ builder.Services.AddDbContext<RestaurantDbContext>(options =>
 builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<IValidator<CreateMenuItemDto>, CreateMenuItemValidator>();
+builder.Services.AddScoped<IValidator<CreateOrderDto>, CreateOrderValidator>();
 
 var app = builder.Build();
 
@@ -34,5 +35,8 @@ app.UseHttpsRedirection();
 // Route groups
 var menu = app.MapGroup("/menu").WithTags("Menu");
 menu.MapMenuEndpoints();
+
+var orders = app.MapGroup("/orders").WithTags("Orders");
+orders.MapOrderEndpoints();
 
 app.Run();
