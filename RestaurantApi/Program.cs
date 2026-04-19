@@ -22,10 +22,6 @@ using (var scope = app.Services.CreateScope())
     DatabaseSeeder.Seed(db);
 }
 
-// Route groups
-var menu = app.MapGroup("/menu").WithTags("Menu");
-menu.MapMenuEndpoints();
-
 // Middleware
 if (app.Environment.IsDevelopment())
 {
@@ -34,5 +30,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Route groups
+var menu = app.MapGroup("/menu").WithTags("Menu");
+menu.MapMenuEndpoints();
 
 app.Run();
